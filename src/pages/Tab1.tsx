@@ -1,8 +1,21 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Tab1.css';
+import {
+  IonContent,
+  IonFab,
+  IonFabButton,
+  IonHeader,
+  IonIcon,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/react";
+import { camera } from "ionicons/icons";
+import ExploreContainer from "../components/ExploreContainer";
+import { usePhotoService } from "../hooks/photo.service";
+import "./Tab1.css";
 
 const Tab1: React.FC = () => {
+  const { gallery, takePhoto } = usePhotoService();
+
   return (
     <IonPage>
       <IonHeader>
@@ -17,6 +30,14 @@ const Tab1: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name="Tab 1 page" />
+        {gallery.map((photo, index) => (
+          <img src={photo.webPath} alt="" key={index} />
+        ))}
+        <IonFab vertical="bottom" horizontal="center" slot="fixed">
+          <IonFabButton onClick={takePhoto}>
+            <IonIcon name="camera" icon={camera}></IonIcon>
+          </IonFabButton>
+        </IonFab>
       </IonContent>
     </IonPage>
   );
