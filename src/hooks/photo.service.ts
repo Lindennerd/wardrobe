@@ -18,7 +18,7 @@ export function usePhotoService() {
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
     });
-    setGallery([image, ...gallery]);
+    if (image) setGallery([image, ...gallery]);
   }
 
   return {
