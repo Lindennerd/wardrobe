@@ -32,45 +32,50 @@ import "@ionic/react/css/text-alignment.css";
 import "@ionic/react/css/text-transformation.css";
 
 /* Theme variables */
+import { AuthContextProvider } from "./context/auth.context";
 import "./theme/variables.css";
 
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/home">
-            <HomePage />
-          </Route>
-          <Route exact path="/wardrobe">
-            <WardrobePage />
-          </Route>
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </IonRouterOutlet>
-        <IonTabBar slot="top">
-          <IonTabButton tab="tab1" href="/home">
-            <IonIcon aria-hidden="true" icon={home} />
-            <IonLabel>Home</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab2" href="/wardrobe">
-            <IonIcon aria-hidden="true" icon={shirt} />
-            <IonLabel>Guarda Roupas</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/profile">
-            <IonIcon aria-hidden="true" icon={personCircle} />
-            <IonLabel>Perfil</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  return (
+    <IonApp>
+      <AuthContextProvider>
+        <IonReactRouter>
+          <IonTabs>
+            <IonRouterOutlet>
+              <Route exact path="/home">
+                <HomePage />
+              </Route>
+              <Route exact path="/wardrobe">
+                <WardrobePage />
+              </Route>
+              <Route path="/profile">
+                <ProfilePage />
+              </Route>
+              <Route exact path="/">
+                <Redirect to="/home" />
+              </Route>
+            </IonRouterOutlet>
+            <IonTabBar slot="bottom">
+              <IonTabButton tab="tab1" href="/home">
+                <IonIcon aria-hidden="true" icon={home} />
+                <IonLabel>Home</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="tab2" href="/wardrobe">
+                <IonIcon aria-hidden="true" icon={shirt} />
+                <IonLabel>Guarda Roupas</IonLabel>
+              </IonTabButton>
+              <IonTabButton tab="tab3" href="/profile">
+                <IonIcon aria-hidden="true" icon={personCircle} />
+                <IonLabel>Perfil</IonLabel>
+              </IonTabButton>
+            </IonTabBar>
+          </IonTabs>
+        </IonReactRouter>
+      </AuthContextProvider>
+    </IonApp>
+  );
+};
 
 export default App;
